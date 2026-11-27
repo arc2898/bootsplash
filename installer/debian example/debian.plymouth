@@ -1,0 +1,8 @@
+[Plymouth Theme]
+Name=Debian
+Description=A calm, cool-toned startup screen.
+ModuleName=script
+
+[script]
+ImageDir=/usr/share/plymouth/themes/debian
+ScriptFile=/usr/share/plymouth/themes/debian/debian.script
