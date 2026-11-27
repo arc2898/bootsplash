@@ -1,0 +1,172 @@
+<!doctype html>
+<html lang="en" data-theme="dark">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta name="color-scheme" content="dark light">
+  <meta name="description" content="Design, preview and package native Linux Plymouth boot splash themes.">
+  <title>Bootsplash Studio</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <div class="app-shell">
+    <aside class="sidebar">
+      <div class="brand-lockup">
+        <div class="brand-mark"><span></span><span></span><span></span></div>
+        <div><div class="brand-name">Bootsplash</div><div class="brand-caption">STUDIO</div></div>
+      </div>
+      <div class="workspace-label">WORKSPACE</div>
+      <nav class="side-nav" aria-label="Main navigation">
+        <button class="nav-item active" data-view="studio"><span class="nav-icon">◫</span> Studio <kbd>1</kbd></button>
+        <button class="nav-item" data-view="gallery"><span class="nav-icon">▦</span> Theme library</button>
+        <button class="nav-item" data-view="projects"><span class="nav-icon">▤</span> My projects</button>
+      </nav>
+      <div class="sidebar-divider"></div>
+      <div class="workspace-label">SYSTEM</div>
+      <nav class="side-nav">
+        <button class="nav-item" data-view="system"><span class="nav-icon">⌘</span> Compatibility</button>
+        <button class="nav-item" data-view="about"><span class="nav-icon">ⓘ</span> About Studio</button>
+      </nav>
+      <div class="sidebar-spacer"></div>
+      <div class="local-card">
+        <div class="local-card-icon">⌁</div>
+        <div><strong>Private by design</strong><p>Projects stay in this browser. No account or cloud sync.</p></div>
+        <span class="online-dot"></span>
+      </div>
+      <div class="sidebar-footer"><span class="version-dot"></span> Version 2.0 · Offline editor</div>
+    </aside>
+
+    <main class="main-area">
+      <header class="topbar">
+        <div class="breadcrumbs"><span>Workspace</span><b>/</b><strong id="breadcrumb-current">Studio</strong></div>
+        <div class="top-actions">
+          <span class="saved-state" id="save-status"><i></i> All changes saved locally</span>
+          <button class="icon-button" id="theme-toggle" aria-label="Toggle color theme" title="Toggle light/dark mode">◐</button>
+          <button class="avatar-button" title="Local workspace">BS</button>
+        </div>
+      </header>
+
+      <section class="view active" id="view-studio">
+        <div class="studio-header">
+          <div class="title-stack">
+            <div class="eyebrow"><span class="eyebrow-line"></span> BOOT EXPERIENCE DESIGNER</div>
+            <div class="title-row"><h1 id="project-title">Aurora</h1><button class="rename-button" id="rename-project" title="Rename theme">✎</button><span class="draft-badge">DRAFT</span></div>
+            <p class="subheading">Design the first impression before your desktop appears.</p>
+          </div>
+          <div class="studio-actions">
+            <button class="button button-quiet" id="save-project">↧ <span>Save project</span></button>
+            <button class="button button-primary" id="open-final-preview"><span class="button-play">▶</span> Preview &amp; install</button>
+          </div>
+        </div>
+
+        <div class="editor-layout">
+          <section class="canvas-column">
+            <div class="canvas-toolbar">
+              <div class="canvas-context"><span class="context-dot"></span><strong>Live canvas</strong><span class="context-separator">·</span><span>16:9 <span class="muted">1920 × 1080</span></span></div>
+              <div class="canvas-tools"><button class="tiny-button" id="zoom-out" aria-label="Zoom out">−</button><span id="zoom-label">Fit</span><button class="tiny-button" id="zoom-in" aria-label="Zoom in">+</button><span class="tool-divider"></span><button class="tiny-button" id="toggle-grid" title="Toggle canvas grid">▦</button><button class="tiny-button" id="center-canvas" title="Fit canvas">⛶</button></div>
+            </div>
+            <div class="canvas-stage" id="canvas-stage">
+              <div class="canvas-frame">
+                <canvas id="design-canvas" width="1920" height="1080" aria-label="Boot splash theme canvas"></canvas>
+                <div class="canvas-overlay" id="canvas-overlay"><span>DRAG TO MOVE</span></div>
+              </div>
+            </div>
+            <div class="canvas-footer"><div><span class="status-dot"></span><span id="canvas-hint">Select an element to edit · Drag to reposition</span></div><div class="canvas-footer-right"><span>SAFE AREA</span><span class="safe-area-indicator">90%</span></div></div>
+            <div class="bottom-controls">
+              <div class="control-group"><span class="group-label">ANIMATION</span><select id="animation-select" aria-label="Animation style"><option value="spinner">Orbit spinner</option><option value="pulse">Breathing logo</option><option value="none">Static</option></select></div>
+              <div class="control-group"><span class="group-label">BACKGROUND</span><input type="color" id="background-color" value="#080d18" aria-label="Background color"><span id="background-color-value">#080D18</span></div>
+              <div class="control-group control-group-end"><button class="text-button" id="reset-theme">↺ Reset canvas</button></div>
+            </div>
+          </section>
+
+          <aside class="editor-panel">
+            <div class="panel-tabs"><button class="panel-tab active" data-panel="design">Design</button><button class="panel-tab" data-panel="layers">Layers <span class="count-pill" id="layer-count">4</span></button></div>
+            <div class="panel-content" id="design-panel">
+              <div class="panel-section">
+                <div class="section-heading"><span>ADD ELEMENT</span><span class="section-plus">+</span></div>
+                <div class="add-grid">
+                  <button class="add-tile" data-add="text"><span class="add-glyph">T</span><span>Text</span></button>
+                  <button class="add-tile" data-add="logo"><span class="add-glyph">▧</span><span>Logo / image</span></button>
+                  <button class="add-tile" data-add="shape"><span class="add-glyph">◧</span><span>Shape</span></button>
+                  <button class="add-tile" data-add="spinner"><span class="add-glyph spinner-glyph">◌</span><span>Spinner</span></button>
+                  <button class="add-tile add-tile-wide" data-add="progress"><span class="add-glyph">▰</span><span>Progress bar</span></button>
+                </div>
+                <input type="file" id="logo-upload" accept="image/png,image/jpeg,image/webp" hidden>
+              </div>
+              <div class="panel-divider"></div>
+              <div class="panel-section" id="selected-inspector">
+                <div class="section-heading"><span>SELECTED ELEMENT</span><button class="text-button small" id="delete-layer">Delete</button></div>
+                <div class="empty-selection" id="empty-selection"><div class="empty-selection-icon">⌖</div><strong>Nothing selected</strong><p>Choose an element on the canvas or add one above.</p></div>
+                <div id="element-properties" class="properties-form" hidden>
+                  <label class="field-label">Name<input id="prop-name" type="text" maxlength="64"></label>
+                  <div class="field-grid"><label class="field-label">X position<input id="prop-x" type="number" min="0" max="1920"></label><label class="field-label">Y position<input id="prop-y" type="number" min="0" max="1080"></label></div>
+                  <div class="field-grid"><label class="field-label">Width<input id="prop-width" type="number" min="1" max="1920"></label><label class="field-label">Height<input id="prop-height" type="number" min="1" max="1080"></label></div>
+                  <label class="field-label" id="prop-text-wrap">Text<input id="prop-text" type="text" maxlength="180"></label>
+                  <div class="field-grid" id="prop-font-row"><label class="field-label">Font size<input id="prop-font-size" type="number" min="8" max="240"></label><label class="field-label">Weight<select id="prop-weight"><option value="400">Regular</option><option value="700">Bold</option></select></label></div>
+                  <div class="field-grid"><label class="field-label">Color<input id="prop-color" type="color" value="#eaf2ff"></label><label class="field-label">Opacity<input id="prop-opacity" type="range" min="0" max="1" step="0.05" value="1"></label></div>
+                  <label class="toggle-row"><span>Visible on boot</span><input type="checkbox" id="prop-visible" checked><i></i></label>
+                </div>
+              </div>
+              <div class="panel-divider"></div>
+              <div class="panel-section theme-meta-section">
+                <div class="section-heading"><span>THEME DETAILS</span></div>
+                <label class="field-label">Theme name<input id="theme-name" value="Aurora" maxlength="64"></label>
+                <label class="field-label">Creator<input id="theme-author" value="" placeholder="Your name (optional)" maxlength="64"></label>
+              </div>
+            </div>
+            <div class="panel-content layers-panel-content" id="layers-panel" hidden>
+              <div class="section-heading"><span>LAYERS</span><span class="muted small-text">Top = front</span></div>
+              <div id="layer-list" class="layer-list"></div>
+              <div class="layer-tip">Drag layers on the canvas to arrange them. Use the eye icon to hide a layer from the final boot screen.</div>
+            </div>
+          </aside>
+        </div>
+      </section>
+
+      <section class="view" id="view-gallery">
+        <div class="page-heading"><div><div class="eyebrow"><span class="eyebrow-line"></span> START WITH A FOUNDATION</div><h1>Theme library</h1><p class="subheading">Original, brand-neutral starting points. Make every detail your own.</p></div><button class="button button-primary" id="blank-theme">＋ Start from scratch</button></div>
+        <div class="gallery-filters"><div class="filter-search">⌕ <input type="search" id="gallery-search" placeholder="Search themes..."></div><div class="filter-pills"><button class="filter-pill active" data-filter="all">All themes</button><button class="filter-pill" data-filter="minimal">Minimal</button><button class="filter-pill" data-filter="motion">Motion</button><button class="filter-pill" data-filter="bold">Bold</button></div></div>
+        <div class="gallery-grid" id="gallery-grid"></div>
+      </section>
+
+      <section class="view" id="view-projects">
+        <div class="page-heading"><div><div class="eyebrow"><span class="eyebrow-line"></span> YOUR WORK</div><h1>My projects</h1><p class="subheading">Themes saved locally in this browser.</p></div><button class="button button-primary" id="new-project">＋ New project</button></div>
+        <div class="projects-grid" id="projects-grid"></div>
+        <div class="import-row"><div><strong>Continue from a project file</strong><p>Import a .json project you exported earlier.</p></div><label class="button button-secondary" for="project-import">Import project<input type="file" id="project-import" accept=".json,application/json" hidden></label></div>
+      </section>
+
+      <section class="view" id="view-system">
+        <div class="page-heading"><div><div class="eyebrow"><span class="eyebrow-line"></span> BEFORE YOU INSTALL</div><h1>Compatibility</h1><p class="subheading">Understand what the installer can change and what varies by Linux distribution.</p></div></div>
+        <div class="compat-grid">
+          <article class="compat-card compat-primary"><div class="compat-icon">◈</div><div><h3>Plymouth</h3><span class="compat-state">Primary splash renderer</span><p>Plymouth displays the graphical splash from early userspace toward the display manager. The exported theme uses its script plugin and raster assets.</p></div></article>
+          <article class="compat-card"><div class="compat-icon">⌘</div><div><h3>GRUB</h3><span class="compat-state">Bootloader settings</span><p>GRUB can pass <code>quiet splash</code> to the kernel and optionally show its own themed menu. This editor targets the post-bootloader Plymouth splash.</p></div></article>
+          <article class="compat-card"><div class="compat-icon">◫</div><div><h3>Initramfs</h3><span class="compat-state">Required integration</span><p>The active initramfs must include Plymouth and the selected theme. Supported rebuild tools are update-initramfs, dracut, and mkinitcpio.</p></div></article>
+          <article class="compat-card"><div class="compat-icon">▤</div><div><h3>Graphics stack</h3><span class="compat-state">Hardware dependent</span><p>Early graphics generally relies on kernel mode-setting (KMS) or a usable framebuffer. Some drivers and firmware still show text or brief mode switches.</p></div></article>
+        </div>
+        <div class="notice-card"><span>!</span><div><strong>No tool can guarantee a completely text-free boot on every machine.</strong><p>Firmware messages, bootloader output, kernel warnings, disk-encryption prompts, and the display manager handoff may still appear. Keep a recovery path and test after installation.</p></div></div>
+        <div class="support-table-wrap"><h2>Integration coverage</h2><table class="support-table"><thead><tr><th>Component</th><th>Detection / action</th><th>Support level</th></tr></thead><tbody><tr><td>Debian / Ubuntu family</td><td>update-initramfs + GRUB updater</td><td><span class="level level-supported">Supported path</span></td></tr><tr><td>Fedora / RHEL family</td><td>dracut + GRUB updater</td><td><span class="level level-supported">Supported path</span></td></tr><tr><td>Arch family</td><td>mkinitcpio hook + GRUB updater</td><td><span class="level level-best">Best effort</span></td></tr><tr><td>openSUSE / other dracut systems</td><td>dracut + detected bootloader tools</td><td><span class="level level-best">Best effort</span></td></tr><tr><td>systemd-boot / non-GRUB</td><td>Theme output is portable; kernel args may need manual setup</td><td><span class="level level-manual">Manual review</span></td></tr><tr><td>BSD / no Plymouth</td><td>No native Plymouth theme install</td><td><span class="level level-none">Not supported</span></td></tr></tbody></table></div>
+      </section>
+
+      <section class="view" id="view-about">
+        <div class="page-heading"><div><div class="eyebrow"><span class="eyebrow-line"></span> ABOUT THE PROJECT</div><h1>Bootsplash Studio</h1><p class="subheading">A focused, local-first design tool for native Linux boot splash themes.</p></div></div>
+        <div class="about-card"><div class="about-mark">BS</div><div><h2>Make boot feel like yours.</h2><p>Design a clean startup experience, preview it in the editor, then export a self-contained Plymouth theme package. The browser editor itself is not part of the installed boot theme and can be removed after exporting.</p><div class="about-tags"><span>Offline first</span><span>No account</span><span>Open source</span><span>Native Plymouth output</span></div></div></div>
+      </section>
+    </main>
+  </div>
+
+  <div class="modal-backdrop" id="preview-modal" hidden>
+    <section class="preview-modal" role="dialog" aria-modal="true" aria-labelledby="preview-title">
+      <div class="modal-header"><div><div class="eyebrow"><span class="eyebrow-line"></span> FINAL CHECK</div><h2 id="preview-title">Your boot experience</h2></div><button class="icon-button" id="close-preview" aria-label="Close preview">×</button></div>
+      <div class="final-preview-frame"><canvas id="final-preview-canvas" width="1920" height="1080"></canvas><div class="preview-frame-overlay"><span>SIMULATED PREVIEW</span><span>1920 × 1080</span></div></div>
+      <div class="preview-summary"><div class="preview-summary-main"><div class="preview-check-icon">✓</div><div><strong id="preview-theme-name">Aurora</strong><p>Native Plymouth script theme · PNG assets · install helper</p></div></div><div class="preview-facts"><span>GRUB <b>quiet splash</b></span><span>INITRAMFS <b>auto-detected</b></span><span>INSTALL <b>with backup</b></span></div></div>
+      <div class="preview-warning"><span>!</span><p>The package prepares a local installer. Browsers cannot run privileged system commands; you will review the final preview, download the package, then run <code>sudo ./install.sh</code> on your Linux system.</p></div>
+      <div class="modal-actions"><button class="button button-quiet" id="download-project">Export project JSON</button><button class="button button-primary" id="build-package">↓ Build install package</button></div>
+      <div class="download-status" id="download-status" role="status" aria-live="polite"></div>
+    </section>
+  </div>
+
+  <div class="toast" id="toast" role="status" aria-live="polite"></div>
+  <script src="src/core.js"></script>
+  <script src="app.js"></script>
+</body>
+</html>
